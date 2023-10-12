@@ -7,5 +7,7 @@ public interface IStudentLogic
     Student GetStudentById(int id);
     void InsertStudents(Student? student);
 
+    Student CreateStudent(Student student);
+
 }
 

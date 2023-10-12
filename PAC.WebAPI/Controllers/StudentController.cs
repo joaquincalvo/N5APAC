@@ -32,7 +32,7 @@ namespace PAC.WebAPI
 
                 
 
-                return CreatedAtAction(nameof(student.Id), new { id = student.Id }, student);
+                return CreatedAtAction(nameof(GetStudentsByID), new { id = student.Id }, student);
             }
             catch (Exception ex)
             {
@@ -40,6 +40,63 @@ namespace PAC.WebAPI
                 return BadRequest("Error al crear estudiante");
             }
             
+        }
+
+        [HttpGet]
+        public IActionResult GetStudents()
+        {
+            try
+            {
+                var students = _StudentService.GetStudents();
+                return Ok(students);
+            }
+            catch (Exception ex)
+            {
+                
+                return BadRequest($"Error al obtener los estudiantes: {ex.Message}");
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetStudentsByID([FromRoute] int id)
+        {
+            try
+            {
+                var student = _StudentService.GetStudentById(id);
+                if (student == null)
+                {
+                    return NotFound($"Estudiante con ID {id} no encontrado");
+
+
+                }
+                return Ok(student);
+            }
+            catch (Exception e)
+            {
+                
+                return BadRequest($"Error al obtener el estudiante: {e.Message}");
+            }
+        }
+
+        [HttpPost("create")]
+
+        public IActionResult CreateStudent([FromBody] Student student)
+        {
+
+            try
+            {
+
+                var createStudent = _StudentService.CreateStudent(student);
+
+                
+
+                return CreatedAtAction(nameof(GetStudentsByID), new { id = createStudent.Id }, createStudent);
+            }
+            catch (Exception ex)
+            {
+               
+                return BadRequest(ex.Message);
+            }
         }
 
     }
