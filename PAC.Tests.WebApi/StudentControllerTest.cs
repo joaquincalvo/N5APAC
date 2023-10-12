@@ -11,8 +11,19 @@ using Microsoft.AspNetCore.Mvc;
 [TestClass]
 public class StudentControllerTest
 {
-        [TestInitialize]
-        public void InitTest()
-        {
-        }
+    private StudentController _controller;
+    private Mock<IStudentLogic> mock;
+
+    [TestInitialize]
+    public void setup()
+    {
+        mock = new Mock<IStudentLogic>();
+        _controller = new StudentController(mock.Object);
+    }
+
+    [TestMethod]
+    public void PostStudentOkTest()
+    {
+        
+    }
 }
