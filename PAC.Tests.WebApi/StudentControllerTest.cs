@@ -26,10 +26,24 @@ public class StudentControllerTest
     {
         var student = new Student();
         student.Id = 1;
-        student.Name = "Test";
+        student.Name = "Pedro";
 
-        var result = _controller.RegisterStudentOK(student);
+        var result = _controller.RegisterStudent(student);
 
         Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+        mock.Verify(s =>s.InsertStudents(student),Times.Once);
+    }
+
+    [TestMethod]
+    public void PostStudentFailTest()
+    {
+        var student = new Student();
+        student.Id = 1;
+        student.Name = "Jose";
+
+        var result = _controller.RegisterStudent(student);
+
+        Assert.IsInstanceOfType(result,typeof(BadRequestObjectResult));
+        mock.Verify(s => s.InsertStudents(student),Times.Once);
     }
 }

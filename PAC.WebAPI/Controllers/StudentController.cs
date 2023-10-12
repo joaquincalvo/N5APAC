@@ -23,7 +23,7 @@ namespace PAC.WebAPI
 
         [HttpPost]
 
-        public IActionResult RegisterStudentOK([FromBody] Student student)
+        public IActionResult RegisterStudent([FromBody] Student student)
         {
             try
             {
