@@ -14,5 +14,33 @@ namespace PAC.WebAPI
     [Route("[controller]")]
     public class StudentController : ControllerBase
     {
+        private readonly IStudentLogic _StudentService;
+
+        public StudentController(IStudentLogic studentService)
+        {
+            _StudentService = studentService;
+        }
+
+        [HttpPost]
+
+        public IActionResult RegisterStudentOK([FromBody] Student student)
+        {
+            try
+            {
+                
+                var createProduct = _StudentService.InsertStudents;
+
+                
+
+                return CreatedAtAction(nameof(student.Id), new { id = student.Id }, student);
+            }
+            catch (Exception ex)
+            {
+                
+                return BadRequest("Error al crear estudiante");
+            }
+            
+        }
+
     }
 }
