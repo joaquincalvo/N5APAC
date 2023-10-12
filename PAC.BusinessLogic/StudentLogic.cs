@@ -9,6 +9,9 @@ using PAC.IDataAccess;
 public class StudentLogic : IStudentLogic
 {
     private readonly IStudentsRepository<Student> _studentsRepository;
+    private User? _currentUser;
+    private IGenericRepository<Session> _sessionRepository;
+    private IGenericRepository<Student> _studentsRepository;
 
     public StudentLogic(IStudentsRepository<Student> repository)
     {
@@ -28,6 +31,11 @@ public class StudentLogic : IStudentLogic
     public void InsertStudents(Student? student)
     {
         _studentsRepository.InsertStudents(student);
+    }
+
+    public Student CreateStudent(Student student)
+    {
+        return student;
     }
 }
 
