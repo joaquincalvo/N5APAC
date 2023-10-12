@@ -24,6 +24,12 @@ public class StudentControllerTest
     [TestMethod]
     public void PostStudentOkTest()
     {
-        
+        var student = new Student();
+        student.Id = 1;
+        student.Name = "Test";
+
+        var result = _controller.RegisterStudentOK(student);
+
+        Assert.IsInstanceOfType(result, typeof(OkObjectResult));
     }
 }
